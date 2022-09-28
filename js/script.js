@@ -1,17 +1,27 @@
-// var for current day
 var currentDay = $('#currentDay')
-console.log(currentDay)
-// var for class container
-// var for time (current hour)
+var calendar = $('.container')
+var hour = moment().format('h');
+var timeBlocks = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5];
 
-// moment() to display current day 
+// display current day 
+currentDay.text(moment().format('dddd, MMMM Do'));
 
-// create time blocks for 9am to 5pm
-    // 3 col
-        // col-2 div (time)
-        // col-8 textarea
-            // click on time block and enter an event
-        // col-2 div (save button)
+// create time blocks
+$(timeBlocks).each(function(index){
+    var row = $('<div>').addClass('row time-block').appendTo(calendar);
+
+    if (index <= 3) {
+        $('<div>').addClass('col-1 hour').text(timeBlocks[index] + 'am').appendTo(row);
+    } else {
+        $('<div>').addClass('col-1 hour').text(timeBlocks[index] + 'pm').appendTo(row);
+    }
+    
+    $('<textarea>').addClass('col-10 description').appendTo(row);
+
+    var saveBtn = $('<div>').addClass('col-1 saveBtn').appendTo(row);
+
+    $('<i>').addClass('fas fa-save').appendTo(saveBtn);
+})
 
 // color code time blocks to indicate past, present, or future
     // past = grey
