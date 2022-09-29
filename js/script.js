@@ -2,69 +2,79 @@ var currentDay = $('#currentDay')
 var calendar = $('.container')
 var hour = moment('3pm', 'ha').format('ha');
 console.log(hour)
-var hourNum = moment().format('k')
+var hourNum = Number(moment('3pm', 'ha').format('k'))
 console.log(hourNum)
 
-// need to fix timeBlocks array
 var timeBlocks = [
-    {eight: {
-            time: moment('8am', 'ha').format('ha'),
-            hour: 8 }},
-    {nine: {
+    {
+        time: moment('8am', 'ha').format('ha'),
+        hour: 8 
+    },
+    {
         time: moment('9am', 'ha').format('ha'),
-        hour: 9 }},
-    {ten: {
+        hour: 9 
+    },
+    {
         time: moment('10am', 'ha').format('ha'),
-        hour: 10 }},
-    {eleven: {
+        hour: 10 
+    },
+    {
         time: moment('11am', 'ha').format('ha'),
-        hour: 11 }},
-    {twelve: {
+        hour: 11 
+    },
+    {
         time: moment('12pm', 'ha').format('ha'),
-        hour: 12 }},
-    {one: {
+        hour: 12 
+    },
+    {
         time: moment('1pm', 'ha').format('ha'),
-        hour: 13 }},
-    {two: {
+        hour: 13 
+    },
+    {
         time: moment('2pm', 'ha').format('ha'),
-        hour: 14 }},
-    {three {
+        hour: 14 
+    },
+    {
         time: moment('3pm', 'ha').format('ha'),
-        hour: 15 }},
-    {four {
+        hour: 15 
+    },
+    {
         time: moment('4pm', 'ha').format('ha'),
-        hour: 16 }},
-    {five: {
+        hour: 16 
+    },
+    {
         time: moment('5pm', 'ha').format('ha'),
-        hour: 17 }},
-    ];
-console.log(timeBlocks[].time)
+        hour: 17 
+    }
+];
+console.log(timeBlocks)
 
 
 // display current day 
 currentDay.text(moment().format('dddd, MMMM Do'));
 
 // create time blocks
-$(timeBlocks.time).each(function(index){
+$(timeBlocks).each(function(index){
     var row = $('<div>').addClass('row time-block').appendTo(calendar);
 
-    $('<div>').addClass('col-2 col-md-1 hour').text(timeBlocks.time[index]).appendTo(row);
+    $('<div>').addClass('col-2 col-md-1 hour').text(timeBlocks[index].time).appendTo(row);
     
     $('<textarea>').addClass('col-8 col-md-10 description').appendTo(row);
-
+    
+    if (timeBlocks[index].hour === hourNum) {
+        $('textarea').addClass('present')
+    } else if (timeBlocks[index].hour < hourNum) {
+        $('textarea').addClass('past')
+    } else if (timeBlocks[index].hour > hourNum) {
+        $('textarea').addClass('future')
+    }
     var saveBtn = $('<div>').addClass('col-2 col-md-1 saveBtn').appendTo(row);
 
     $('<i>').addClass('fas fa-save').appendTo(saveBtn);
-    console.log(timeBlocks.time[index])
+    console.log(timeBlocks[index].time)
+    console.log(timeBlocks[index].hour)
 
     // need to update once timeBlocks array is figured out
-    if (timeBlocks[index] === hour) {
-        $('textarea').addClass('present')
-    } else if (timeBlocks[index] < hourNum) {
-        $('textarea').addClass('past')
-    } else if (timeBlocks[index] > hourNum) {
-        $('textarea').addClass('future')
-    }
 })
 
 // color code time blocks to indicate past, present, or future
