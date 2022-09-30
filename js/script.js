@@ -1,9 +1,7 @@
 var currentDay = $('#currentDay')
 var calendar = $('.container')
-var hour = moment('3pm', 'ha').format('ha');
-console.log(hour)
-var hourNum = Number(moment('3pm', 'ha').format('k'))
-console.log(hourNum)
+var hourNum = Number(moment().format('k'));
+// var hourNum = Number(moment('12pm', 'ha').format('k')); used to check color-coded time blocks
 
 var timeBlocks = [
     {
@@ -47,41 +45,41 @@ var timeBlocks = [
         hour: 17 
     }
 ];
-console.log(timeBlocks)
-
 
 // display current day 
 currentDay.text(moment().format('dddd, MMMM Do'));
 
-// create time blocks
-$(timeBlocks).each(function(index){
+// loop through timeBlocks[]
+$(timeBlocks).each(function(index) {
+    // create time blocks
     var row = $('<div>').addClass('row time-block').appendTo(calendar);
-
+    
     $('<div>').addClass('col-2 col-md-1 hour').text(timeBlocks[index].time).appendTo(row);
     
-    $('<textarea>').addClass('col-8 col-md-10 description').appendTo(row);
+    var textarea = $('<textarea>').addClass('col-8 col-md-10 description').appendTo(row);
     
+    // get saved data from local storage and set to textarea
+    var savedEvent = localStorage.getItem('event-' + timeBlocks[index].time);
+    textarea.val(savedEvent);
+    
+    // color code the time blocks
     if (timeBlocks[index].hour === hourNum) {
-        $('textarea').addClass('present')
+        $(textarea).addClass('present')
     } else if (timeBlocks[index].hour < hourNum) {
-        $('textarea').addClass('past')
+        $(textarea).addClass('past')
     } else if (timeBlocks[index].hour > hourNum) {
-        $('textarea').addClass('future')
+        $(textarea).addClass('future')
     }
+
+    // create save button
     var saveBtn = $('<div>').addClass('col-2 col-md-1 saveBtn').appendTo(row);
-
+    
     $('<i>').addClass('fas fa-save').appendTo(saveBtn);
-    console.log(timeBlocks[index].time)
-    console.log(timeBlocks[index].hour)
+    
+    // save data to local storage
+    function saveText() {
+        localStorage.setItem('event-' + timeBlocks[index].time, textarea.val())
+    }
 
-    // need to update once timeBlocks array is figured out
+    $(saveBtn).on('click', saveText)
 })
-
-// color code time blocks to indicate past, present, or future
-
-    // past = grey
-    // present = red
-    // future = green
-
-// save button that saves text for that event in local storage
-    // text shows up at top saying the text was saved to local storage
