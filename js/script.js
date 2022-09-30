@@ -2,6 +2,7 @@ var currentDay = $('#currentDay')
 var calendar = $('.container')
 var hourNum = Number(moment().format('k'));
 // var hourNum = Number(moment('12pm', 'ha').format('k')); used to check color-coded time blocks
+var saveAlert = $('#saveAlert');
 
 var timeBlocks = [
     {
@@ -46,6 +47,9 @@ var timeBlocks = [
     }
 ];
 
+// hides save alert
+saveAlert.hide();
+
 // display current day 
 currentDay.text(moment().format('dddd, MMMM Do'));
 
@@ -64,12 +68,12 @@ $(timeBlocks).each(function(index) {
     
     // color code the time blocks
     if (timeBlocks[index].hour === hourNum) {
-        $(textarea).addClass('present')
+        $(textarea).addClass('present');
     } else if (timeBlocks[index].hour < hourNum) {
-        $(textarea).addClass('past')
+        $(textarea).addClass('past');
     } else if (timeBlocks[index].hour > hourNum) {
-        $(textarea).addClass('future')
-    }
+        $(textarea).addClass('future');
+    };
 
     // create save button
     var saveBtn = $('<div>').addClass('col-2 col-md-1 saveBtn').appendTo(row);
@@ -78,8 +82,9 @@ $(timeBlocks).each(function(index) {
     
     // save data to local storage
     function saveText() {
-        localStorage.setItem('event-' + timeBlocks[index].time, textarea.val())
-    }
+        localStorage.setItem('event-' + timeBlocks[index].time, textarea.val());
+        saveAlert.show().fadeOut(2000);
+    };
 
-    $(saveBtn).on('click', saveText)
+    $(saveBtn).on('click', saveText);
 })
