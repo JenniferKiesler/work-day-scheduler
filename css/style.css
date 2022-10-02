@@ -13,6 +13,7 @@ textarea {
   padding: 10px;
 }
 
+/* header */
 .jumbotron {
   text-align: center;
   background-color: transparent;
@@ -21,6 +22,7 @@ textarea {
   border-bottom: 10px solid black;
 }
 
+/* container class */
 #saveAlert {
   text-align: center;
 }
@@ -29,6 +31,7 @@ textarea {
   white-space: pre-wrap;
 }
 
+/* time block rows */
 .time-block {
   text-align: center;
   border-radius: 15px;
@@ -40,12 +43,14 @@ textarea {
   border-top: 1px solid white;;
 }
 
+/* times in time block */
 .hour {
   background-color: #ffffff;
   color: #000000;
   border-top: 1px dashed #000000;
 }
 
+/* color codes for textareas */
 .past {
   background-color: #d3d3d3;
   color: black;
@@ -61,6 +66,7 @@ textarea {
   color: white;
 }
 
+/* save button */
 .saveBtn {
   border-left: 1px solid black;
   border-top-right-radius: 15px;
