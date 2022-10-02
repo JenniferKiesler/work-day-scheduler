@@ -16,3 +16,5 @@ In this daily planner,
 
 
 ## Deployed Link
+
+https://jenniferkiesler.github.io/work-day-scheduler/
