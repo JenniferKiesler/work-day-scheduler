@@ -13,7 +13,7 @@ In this daily planner,
 
 ## Visuals
 
-
+![Screenshot](images/work-day-scheduler-screenshot.png)
 
 ## Deployed Link
 
