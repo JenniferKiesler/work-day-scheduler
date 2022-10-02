@@ -50,23 +50,23 @@ var timeBlocks = [
 // hides save alert
 saveAlert.hide();
 
-// display current day 
+// displays current day 
 currentDay.text(moment().format('dddd, MMMM Do'));
 
-// loop through timeBlocks[]
+// loops through timeBlocks[] to create the time blocks
 $(timeBlocks).each(function(index) {
-    // create time blocks
+    
     var row = $('<div>').addClass('row time-block').appendTo(calendar);
     
     $('<div>').addClass('col-2 col-md-1 hour').text(timeBlocks[index].time).appendTo(row);
     
     var textarea = $('<textarea>').addClass('col-8 col-md-10 description').appendTo(row);
     
-    // get saved data from local storage and set to textarea
+    // gets saved data from local storage and sets to textarea
     var savedEvent = localStorage.getItem('event-' + timeBlocks[index].time);
     textarea.val(savedEvent);
     
-    // color code the time blocks
+    // color codes the time blocks
     if (timeBlocks[index].hour === hourNum) {
         $(textarea).addClass('present');
     } else if (timeBlocks[index].hour < hourNum) {
@@ -75,14 +75,17 @@ $(timeBlocks).each(function(index) {
         $(textarea).addClass('future');
     };
 
-    // create save button
+    // creates save button
     var saveBtn = $('<div>').addClass('col-2 col-md-1 saveBtn').appendTo(row);
     
+    // creates save icon
     $('<i>').addClass('fas fa-save').appendTo(saveBtn);
     
-    // save data to local storage
+    // saves data to local storage
     function saveText() {
         localStorage.setItem('event-' + timeBlocks[index].time, textarea.val());
+        
+        // shows save alert and then the alert fades out
         saveAlert.show().fadeOut(2000);
     };
 
