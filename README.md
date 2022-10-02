@@ -2,7 +2,7 @@
 
 ## Description
 
-This application is a simple calendar that allows a user to save events for each hour of the day. 
+This application is a simple calendar that allows a user to save events for each hour of the work day. 
 
 In this daily planner,
 - the current day is displayed at the top of the calendar
